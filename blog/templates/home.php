@@ -1,6 +1,11 @@
 <?php
-require '../src/DAO/DAO.php';
-require '../src/DAO/ArticleDAO.php';
+require '../config/Autoloader.php';
+
+use \App\config\Autoloader;
+use App\src\DAO\ArticleDAO; //facilite l'appel d'Article DAO lors d'un new
+
+Autoloader::register();
+
 
 ?>
 
@@ -18,7 +23,7 @@ require '../src/DAO/ArticleDAO.php';
         <?php
         /*$db = new Database();
         $db->checkConnection();*/
-        $article = new Article();
+        $article = new ArticleDAO(); // juste ArticleDAO au lieu du chemin intégrale grâce à use
         $articles = $article->getArticles();
         while($article=$articles->fetch())
 

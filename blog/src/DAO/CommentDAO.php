@@ -1,6 +1,9 @@
 <?php
+namespace App\src\DAO;
+//use PDO;
+//use Exception;
 
-class Comment extends Database
+class CommentDAO extends DAO
 {
     public function getCommentsFromArticles($articleId)
     {

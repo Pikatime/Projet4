@@ -1,7 +1,9 @@
 <?php
+namespace App\src\DAO;
+//use PDO;
+//use Exception;
 
-
-class Article extends Database { //class Article est étendu à la classe Database
+class ArticleDAO extends DAO { //class Article est étendu à la classe Database
    
     public function getArticles()// Récupère tous les articles
     {
