@@ -1,11 +1,7 @@
 <?php
-require '../config/Autoloader.php';
+require '../vendor/autoload.php';
 
-use \App\config\Autoloader;
 use App\src\DAO\ArticleDAO; //facilite l'appel d'Article DAO lors d'un new
-
-Autoloader::register();
-
 
 ?>
 

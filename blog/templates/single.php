@@ -1,12 +1,11 @@
 <?php
-require '../config/Autoloader.php';
+require '../vendor/autoload.php';
 
 
 use \App\config\Autoloader;
 use App\src\DAO\ArticleDAO;
 use App\src\DAO\CommentDAO;
 
-Autoloader::register();
 
 ?>
 

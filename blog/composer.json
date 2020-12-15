@@ -1,0 +1,13 @@
+{
+    "name": "ritchy/projet4",
+    "authors": [
+        {
+            "name": "Ritchy Randy",
+            "email": "ritchy.ran@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"App\\src\\":"src/"}
+    },
+    "require": {}
+}
