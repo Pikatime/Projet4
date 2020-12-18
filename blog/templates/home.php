@@ -1,6 +1,6 @@
 <?php
-require '../vendor/autoload.php';
 
+//require '../public/index.php';
 use App\src\DAO\ArticleDAO; //facilite l'appel d'Article DAO lors d'un new
 
 ?>
@@ -19,14 +19,14 @@ use App\src\DAO\ArticleDAO; //facilite l'appel d'Article DAO lors d'un new
         <?php
         /*$db = new Database();
         $db->checkConnection();*/
-        $article = new ArticleDAO(); // juste ArticleDAO au lieu du chemin intégrale grâce à use
+        $article = new ArticleDAO(); // juste ArticleDAO au lieu du chemin intégral grâce à use
         $articles = $article->getArticles();
         while($article=$articles->fetch())
 
         {
             ?>
             <div>
-                <h2><a href="single.php?articleId=<?=htmlspecialchars($article->id);?>"><?=htmlspecialchars($article->title);?></a></h2><?php//ajout de l'identifiant de l'article puis, redirection vers la page single.php?>
+                <h2><a href="../public/index.php?route=article&articleId=<?= htmlspecialchars($article->id);?>"><?= htmlspecialchars($article->title);?></a></h2>
                 <p><?=htmlspecialchars($article->content);?></p>
                 <p><?=htmlspecialchars($article->author);?></p>
                 <p><?=htmlspecialchars($article->createdAt);?></p>

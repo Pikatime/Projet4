@@ -5,9 +5,9 @@ use Exception;
 
 abstract class DAO //abstract rend l'instanciation de la classe Database impossible
 {
-    const DB_HOST = 'mysql:host=localhost; dbname=blog; charset=utf8';
-    const DB_USER = 'root';
-    const DB_PASS = '';
+    //const DB_HOST = 'mysql:host=localhost; dbname=p4; charset=utf8';
+    //const DB_USER = 'root';
+    //const DB_PASS = '';
 
     private $connection; //Cet attribue stock la connexion si elle existe, sinon renvoie null
 
@@ -24,7 +24,7 @@ abstract class DAO //abstract rend l'instanciation de la classe Database impossi
     private function getConnection() //passage en private pour qu'il ne puisse pas être appelé n'importe où
     {
         try{
-            $this->connection = new PDO(self::DB_HOST, self::DB_USER, self::DB_PASS);
+            $this->connection = new PDO(DB_HOST, DB_USER, DB_PASS);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $this->connection; // Renvoie à la connexion à la BDD
         }
