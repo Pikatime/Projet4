@@ -18,9 +18,9 @@ use App\src\DAO\ArticleDAO; //facilite l'appel d'Article DAO lors d'un new
         <p>test</p>
         <?php
         /*$db = new Database();
-        $db->checkConnection();*/
+        $db->checkConnection();
         $article = new ArticleDAO(); // juste ArticleDAO au lieu du chemin intégral grâce à use
-        $articles = $article->getArticles();
+        $articles = $article->getArticles();*/
         while($article=$articles->fetch())
 
         {

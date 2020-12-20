@@ -1,7 +1,7 @@
 <?php
-use \App\config\Autoloader;
-use App\src\DAO\ArticleDAO;
-use App\src\DAO\CommentDAO;
+//use \App\config\Autoloader;
+//use App\src\DAO\ArticleDAO;
+//use App\src\DAO\CommentDAO;
 
 
 ?>
@@ -15,8 +15,6 @@ use App\src\DAO\CommentDAO;
 
 <body>
     <?php
-        $article = new ArticleDAO();
-        $articles = $article->getArticle($_GET['articleId']);// récupère l'Id de l'article de manière dynamique
         $article=$articles->fetch()
     ?>
 
@@ -29,16 +27,17 @@ use App\src\DAO\CommentDAO;
 
     <br>
     <?php
+    //$article = new ArticleDAO();
+    //$articles = $article->getArticle($_GET['articleId']);// récupère l'Id de l'article de manière dynamique
     $articles->closeCursor();//Finalise une serie de fetch, bonne pratique
     ?>
 
     <a href = "../public/index.php">Retour à l'accueil</a>
-
     <div id="comments" class="text-left" style="margin-left:50px">
         <h3>Commentaires</h3>
         <?php
-        $comment = new CommentDAO();
-        $comments = $comment->getCommentsFromArticles($_GET['articleId']);
+        //$comment = new CommentDAO();
+        //$comments = $comment->getCommentsFromArticles($_GET['articleId']);
         while($comment = $comments->fetch())
         {
             ?>
