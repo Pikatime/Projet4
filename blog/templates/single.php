@@ -1,54 +1,31 @@
-<?php
-//use \App\config\Autoloader;
-//use App\src\DAO\ArticleDAO;
-//use App\src\DAO\CommentDAO;
+<?php $this->title="Article";?> <!-- Structure de base du HTML -->
 
-
-?>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <title>Mon blog</title>
-</head>
 
 <body>
-    <?php
-        $article=$articles->fetch()
-    ?>
-
+<div>
+    <h1>Mon blog</h1>
+    <p>En construction</p>
     <div>
-        <h2><?=htmlspecialchars($article->title);?></h2>
-        <p><?=htmlspecialchars($article->content);?></p>
-        <p><?=htmlspecialchars($article->author);?></p>
-        <p><?=htmlspecialchars($article->createdAt);?></p>
+        <h2><?= htmlspecialchars($article->getTitle());?></h2>
+        <p><?= htmlspecialchars($article->getContent());?></p>
+        <p><?= htmlspecialchars($article->getAuthor());?></p>
+        <p>Créé le : <?= htmlspecialchars($article->getCreatedAt());?></p>
     </div>
-
     <br>
-    <?php
-    //$article = new ArticleDAO();
-    //$articles = $article->getArticle($_GET['articleId']);// récupère l'Id de l'article de manière dynamique
-    $articles->closeCursor();//Finalise une serie de fetch, bonne pratique
-    ?>
-
-    <a href = "../public/index.php">Retour à l'accueil</a>
-    <div id="comments" class="text-left" style="margin-left:50px">
+    <a href="../public/index.php">Retour à l'accueil</a>
+    <div id="comments" class="text-left" style="margin-left: 50px">
         <h3>Commentaires</h3>
         <?php
-        //$comment = new CommentDAO();
-        //$comments = $comment->getCommentsFromArticles($_GET['articleId']);
-        while($comment = $comments->fetch())
+        foreach ($comments as $comment)
         {
             ?>
-            <h4><?=htmlspecialchars($comment->pseudo);?></h4>
-            <p><?=htmlspecialchars($comment->content);?></p>
-            <p><?=htmlspecialchars($comment->createdAt);?></p>
+            <h4><?= htmlspecialchars($comment->getPseudo());?></h4>
+            <p><?= htmlspecialchars($comment->getContent());?></p>
+            <p>Posté le <?= htmlspecialchars($comment->getCreatedAt());?></p>
             <?php
         }
-        $comments->closeCursor();
         ?>
     </div>
-    
+</div>
 </body>
 </html>

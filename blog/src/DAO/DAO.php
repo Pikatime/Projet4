@@ -5,10 +5,6 @@ use Exception;
 
 abstract class DAO //abstract rend l'instanciation de la classe Database impossible
 {
-    //const DB_HOST = 'mysql:host=localhost; dbname=p4; charset=utf8';
-    //const DB_USER = 'root';
-    //const DB_PASS = '';
-
     private $connection; //Cet attribue stock la connexion si elle existe, sinon renvoie null
 
     private function checkConnection()
@@ -40,12 +36,10 @@ abstract class DAO //abstract rend l'instanciation de la classe Database impossi
         if($parameters)// Si parametres est vrai
         {
             $result=$this->checkConnection()->prepare($sql);//$result se connecte à la BDD
-            $result->setFetchMode(PDO::FETCH_CLASS,ArticleDAO::class);//Instruction sur la manière d'afficher
             $result->execute($parameters); //excécution des parametres demandes
             return $result; //termine la fonction et retourne l'argument $result
         }
         $result=$this->checkConnection()->query($sql); //$result se connecte à la BDD et récupère les infos
-        $result->setFetchMode(PDO::FETCH_CLASS, ArticleDAO::class);
         return $result; //termine la fonction et retourne l'argument $result
     }
 }

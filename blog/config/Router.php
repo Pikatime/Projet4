@@ -24,22 +24,18 @@ class Router
             {
                 if($_GET['route']==='article'){ //Renvoie vers single
                     $this->frontController->article($_GET['articleId']);
-                    //require '../templates/single.php';
                 }
                 else{
-                    //echo 'Page inconnue';
                     $this->errorController->errorNotFound();
                 }
             }
 
             else{
                 $this->frontController->home();
-                //require '../templates/home.php';
             }
         }
 
         catch(Exception $e){
-            //echo 'Erreur';
             $this->errorController->errorServer();
         }
     }
