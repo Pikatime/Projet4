@@ -1,5 +1,6 @@
 <?php
 namespace App\src\DAO;
+use App\config\Parameter;
 use App\src\model\Article;
 
 class ArticleDAO extends DAO { //class Article est étendu à la classe Database
@@ -40,12 +41,13 @@ class ArticleDAO extends DAO { //class Article est étendu à la classe Database
         return $this->buildObject($article);
     }
 
-    public function addArticle($article)//création d'une requête INSERT
+    public function addArticle(Parameter $post)//création d'une requête INSERT
     {
-        extract($article);
-        var_dump($article);
+        //extract($article);
+        //var_dump($article);
     $sql = 'INSERT INTO article (title, content, author, createdAt) VALUES (?,?,?,NOW())';
-    $this->createQuery($sql,[$title,$content,$author]);
+    $this->createQuery($sql,[$post->get('title'), $post->get('content'), $post->get('author')]);
+    //$this->createQuery($sql,[$title,$content,$author]);
     }
 
 }

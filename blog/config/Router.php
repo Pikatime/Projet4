@@ -11,25 +11,31 @@ class Router
     private $frontController;
     private $backController;
     private $errorController;
+    private $request;
 
-    public function __construct()
-    {
+    public function __construct(){
+        $this->request = new Request();
         $this->frontController = new FrontController();// FrontController() est systématiquement appelé dans run()
         $this->backController = new BackController();
         $this->errorController = new ErrorController();
+        
     }
 
-    public function run()
-    {
+    public function run(){
+
+        $route = $this->request->getGet()->get('route');
+
         try
         {
-            if(isset($_GET['route']))
+            if(isset($route))
             {
-                if($_GET['route']==='article'){ //Renvoie vers single
-                    $this->frontController->article($_GET['articleId']);
+                if($route==='article'){ //Renvoie vers single
+                    $this->frontController->article($this->request->getGet()->get('articleId'));
+                    /*$this->frontController->article($_GET['articleId']);*/
                 }
-                elseif($_GET['route'] === 'addArticle'){ //Permet l'ajout d'un nouvel article
-                    $this->backController->AddArticle($_POST);// Création de la route via la method addArticle
+                elseif($route === 'addArticle'){ //Permet l'ajout d'un nouvel article
+                    $this->backController->AddArticle($this->request->getPost());
+                    //$this->backController->AddArticle($_POST);// Création de la route via la method addArticle
                 }
                 else{
                     $this->errorController->errorNotFound();
@@ -42,7 +48,6 @@ class Router
         }
 
         catch(Exception $e){
-            var_dump($e);
             $this->errorController->errorServer();
             
         }

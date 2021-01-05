@@ -1,20 +1,13 @@
 <?php
 namespace App\src\controller;
-use App\src\DAO\ArticleDAO;
-use App\src\model\View;
+use App\config\Parameter;
 
-class BackController{
-    private $view;
-    
-    public function __construct()
-    {
-        $this->view = new View();
-    }
+class BackController extends Controller{
 
-    public function addArticle($post){// mise en place des conditions pour la création ou non d'un article via AddAticle
-    if(isset($post['submit'])){
-        $articleDAO = new ArticleDAO();
-        $articleDAO->addArticle($post);
+    public function addArticle(Parameter $post){// mise en place des conditions pour la création ou non d'un article via AddAticle
+    if($post->get('submit')){
+        $this->articleDAO->addArticle($post);
+        $this->session->set('add_article','Le nouvel article a bien été ajouté');
         header('Location: index.php');
     }
 
@@ -23,4 +16,5 @@ class BackController{
     ]);
     }
 }
+//session n'est pas appelé depuis backcontroller mais via controller car request permet d'accéder à parameter et session, et appeler depuis controller les rendra dispo pour les classes filles
 
