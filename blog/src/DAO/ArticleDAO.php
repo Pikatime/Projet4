@@ -17,8 +17,6 @@ class ArticleDAO extends DAO { //class Article est étendu à la classe Database
 
     }
     
-
-   
     public function getArticles()// Récupère tous les articles
     {
         $sql = 'SELECT id, title, content, author, createdAt FROM article ORDER BY id DESC'; //On définit ce que contient $sql
@@ -43,11 +41,18 @@ class ArticleDAO extends DAO { //class Article est étendu à la classe Database
 
     public function addArticle(Parameter $post)//création d'une requête INSERT
     {
-        //extract($article);
-        //var_dump($article);
     $sql = 'INSERT INTO article (title, content, author, createdAt) VALUES (?,?,?,NOW())';
     $this->createQuery($sql,[$post->get('title'), $post->get('content'), $post->get('author')]);
-    //$this->createQuery($sql,[$title,$content,$author]);
+    }
+
+    public function editArticle(Parameter $post, $articleId){
+        $sql = 'UPDATE article SET title=:title, content=:content, author=:author WHERE id=:articleId';
+        $this->createQuery($sql,[
+            'title'=> $post->get('title'),
+            'content'=> $post->get('content'),
+            'author'=> $post->get('author'),
+            'articleId'=>$articleId
+        ]);
     }
 
 }

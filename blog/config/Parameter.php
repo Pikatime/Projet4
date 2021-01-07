@@ -19,4 +19,8 @@ class Parameter{
     public function set($name, $value){
         $this->parameter[$name] = $value;
     }
+
+    public function all(){ //Permet de récupérer toutes les données de tous les parmètres
+        return $this->parameter;
+    }
 }

@@ -22,7 +22,6 @@ class Router
     }
 
     public function run(){
-
         $route = $this->request->getGet()->get('route');
 
         try
@@ -31,17 +30,17 @@ class Router
             {
                 if($route==='article'){ //Renvoie vers single
                     $this->frontController->article($this->request->getGet()->get('articleId'));
-                    /*$this->frontController->article($_GET['articleId']);*/
                 }
                 elseif($route === 'addArticle'){ //Permet l'ajout d'un nouvel article
                     $this->backController->AddArticle($this->request->getPost());
-                    //$this->backController->AddArticle($_POST);// Création de la route via la method addArticle
+                }
+                elseif($route=== 'editArticle'){
+                    $this->backController->editArticle($this->request->getPost(), $this->request->getGet()->get('articleId'));
                 }
                 else{
                     $this->errorController->errorNotFound();
                 }
             }
-
             else{
                 $this->frontController->home();
             }

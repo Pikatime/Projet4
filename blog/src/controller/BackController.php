@@ -10,10 +10,22 @@ class BackController extends Controller{
         $this->session->set('add_article','Le nouvel article a bien été ajouté');
         header('Location: index.php');
     }
-
     return $this->view->render('add_article',[
         'post' => $post
     ]);
+    }
+
+    public function editArticle(Parameter $post, $articleId){
+        $article = $this->articleDAO->getArticle($articleId);
+        if($post->get('submit')){
+            $this->articleDAO->editArticle($post,$articleId);
+            $this->session->set('edit_article', 'L\'article a bien été modifié');
+            header('Location: index.php');
+        }
+
+        return $this->view->render('edit_article', [
+            'article'=>$article
+        ]);
     }
 }
 //session n'est pas appelé depuis backcontroller mais via controller car request permet d'accéder à parameter et session, et appeler depuis controller les rendra dispo pour les classes filles
