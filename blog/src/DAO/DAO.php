@@ -10,10 +10,8 @@ abstract class DAO //abstract rend l'instanciation de la classe Database impossi
     private function checkConnection()
     {
         if($this->connection=== null){// Si pas connecté à la BDD, se connecter à la BDD
-            //var_dump('connexion inconnue'); Permet de vérifier que la method checkConnection fonctionne. Utilisable si checkConnection est public
             return $this->getConnection();
         }
-        //var_dump('connexion deja existante'); Verifie que la methode fonctionne bien si $connetion est non null. Utilisable si checkConnection est public, et modifier home pour voir cela
         return $this->connection; // Si la connexion existe, elle est renvoyée directement
     }
 

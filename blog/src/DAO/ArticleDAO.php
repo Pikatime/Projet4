@@ -4,7 +4,6 @@ use App\config\Parameter;
 use App\src\model\Article;
 
 class ArticleDAO extends DAO { //class Article est étendu à la classe Database
-    
     private function buildObject($row){ //transforme les résultats en obj basé sur la class Article
         $article = new Article();
         $article->setId($row['id']);
@@ -14,7 +13,6 @@ class ArticleDAO extends DAO { //class Article est étendu à la classe Database
         $article->setCreatedAt($row['createdAt']);
 
         return $article;
-
     }
     
     public function getArticles()// Récupère tous les articles
