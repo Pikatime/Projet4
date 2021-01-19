@@ -46,6 +46,12 @@ class BackController extends Controller{
             'article'=> $article
         ]);
     }
+
+    public function deleteArticle($articleId){
+    $this->articleDAO->deleteArticle($articleId);
+    $this->session->set('delete_article', 'L\'article a été supprimé');
+    header('Location: index.php');
+    }
 }
 //session n'est pas appelé depuis backcontroller mais via controller car request permet d'accéder à parameter et session, et appeler depuis controller les rendra dispo pour les classes filles
 

@@ -53,6 +53,13 @@ class ArticleDAO extends DAO { //class Article est étendu à la classe Database
         ]);
     }
 
+    public function deleteArticle($articleId){
+        $sql = 'DELETE FROM comment WHERE article_id=?';
+        $this->createQuery($sql,[$articleId]);
+        $sql = 'DELETE FROM article WHERE id=?';
+        $this->createQuery($sql, [$articleId]);
+    }
+
 }
 
 //Methode dans modele qui permet de sauvegarder les donnees. 
