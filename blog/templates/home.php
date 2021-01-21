@@ -8,6 +8,7 @@
         <?= $this->session->show('add_article'); ?>
         <?= $this->session->show('edit_article'); ?>
         <?= $this->session->show('delete_article'); ?>
+        <?= $this->session->show('add_comment'); ?>
         <a href="../public/index.php?route=addArticle">Nouvel article</a> <!--Lien pour créer un nouvel article-->
         <?php
         foreach ($articles as $article)
