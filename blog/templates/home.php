@@ -9,10 +9,14 @@
         <?= $this->session->show('edit_article'); ?>
         <?= $this->session->show('delete_article'); ?>
         <?= $this->session->show('add_comment'); ?>
+        <?= $this->session->show('register'); ?>
+
+        <a href="../public/index.php?route=register">Inscription</a>
+        <a href="..public/index.php?route=login">Connexion</a>
         <a href="../public/index.php?route=addArticle">Nouvel article</a> <!--Lien pour créer un nouvel article-->
+        
         <?php
         foreach ($articles as $article)
-
         {
             ?>
             <div>
@@ -21,10 +25,8 @@
                 <p><?=htmlspecialchars($article->getAuthor());?></p>
                 <p><?=htmlspecialchars($article->getCreatedAt());?></p>
             </div>
-
             <br>
             <?php
-
         }
         ?>
     </div>  

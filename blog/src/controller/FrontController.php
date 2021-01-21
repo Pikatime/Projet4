@@ -41,7 +41,26 @@ class FrontController extends Controller
                 'errors' => $errors
             ]);
 
-
         }
+    }
+
+    public function register(Parameter $post){
+        if($post->get('submit')){
+            $errors = $this->validation->validate($post, 'User');
+            if($this->userDAO->CheckUser($post)){
+                $errors['pseudo'] = $this->userDAO->checkUser($post);
+            }
+
+            if(!$errors){
+                $this->userDAO->register($post);
+                $this->session->set('register', 'Votre inscription a bien été effectuée');
+                header('Location: index.php');
+            }
+            return $this->view->render('register', [
+                'post' => $post,
+                'errors' => $errors
+            ]);
+        }
+        return $this->view->render('register');
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\config;
 use App\src\controller\FrontController;
 use App\src\controller\BackController;
@@ -23,7 +22,6 @@ class Router
 
     public function run(){
         $route = $this->request->getGet()->get('route');
-
         try
         {
             if(isset($route))
@@ -44,6 +42,10 @@ class Router
                     $this->frontController->addComment($this->request->getPost(), $this->request->getGet()->get('articleId'));
                 }
 
+                elseif($route === 'register'){
+                    $this->frontController->register($this->request->getPost());
+                }
+
                 else{
                     $this->errorController->errorNotFound();
                 }
@@ -55,7 +57,6 @@ class Router
 
         catch(Exception $e){
             $this->errorController->errorServer();
-            
         }
     }
 }
