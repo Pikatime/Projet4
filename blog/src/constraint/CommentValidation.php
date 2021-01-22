@@ -49,7 +49,7 @@ class CommentValidation extends Validation{
         }
     }
 
-    private function checkCOntent($name, $value){
+    private function checkContent($name, $value){
         if($this->constraint->notBlank($name, $value)){
             return $this->constraint->notBlank('contenu', $value);
         }
