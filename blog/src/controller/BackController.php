@@ -58,6 +58,38 @@ class BackController extends Controller{
         $this->session->set('delete_comment', 'Le commentaire a été supprimé');
         header('Location: index.php');
     }
+
+    public function profile(){
+        return $this->view->render('profile');
+    }
+
+    public function updatePassword(Parameter $post){
+        if($post->get('submit')){
+            $this->userDAO->updatePassword($post, $this->session->get('pseudo'));
+            $this->session->set('update_password', 'Le mot de passe a été mis à jour');
+            header('Location: index.php?route=profile');
+        }
+        return $this->view->render('update_password');
+    }
+
+    public function logout(){
+        $this->logoutOrDelete('logout');
+    }
+
+    public function deleteAccount(){
+        $this->userDAO->deleteAccount($this->session->get('pseudo'));
+        $this->logoutOrDelete('delete_account');
+    }
+
+    public function logoutOrDelete($param){
+        $this->session->stop();
+        $this->session->start();
+        if($param === 'logout'){
+            $this->session->set($param, 'A bientot');
+        }else{
+            $this->session->set($param, 'Votre compte a bien été supprimé');
+        }
+        header('Location: index.php');
+    }
 }
 //session n'est pas appelé depuis backcontroller mais via controller car request permet d'accéder à parameter et session, et appeler depuis controller les rendra dispo pour les classes filles
-
