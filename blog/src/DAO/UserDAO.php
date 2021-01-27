@@ -5,8 +5,9 @@ use App\config\Parameter;
 
 class UserDAO extends DAO{
     public function register(Parameter $post){
-        $sql = 'INSERT INTO user (pseudo, password, createdAt) VALUES(?, ?, NOW())';
-        $this->createQuery($sql,[$post->get('pseudo'), password_hash($post->get('password'), PASSWORD_BCRYPT)]);
+        $this->checkUser($post);
+        $sql = 'INSERT INTO user (pseudo, password, createdAt, role_id) VALUES(?, ?, NOW(), ?)';
+        $this->createQuery($sql,[$post->get('pseudo'), password_hash($post->get('password'), PASSWORD_BCRYPT), 2]);
     }
 
     public function checkUser(Parameter $post){ //Evite les doublons de pseudos
@@ -19,7 +20,7 @@ class UserDAO extends DAO{
     }
 
     public function login(Parameter $post){
-        $sql = 'SELECT id, password FROM user WHERE pseudo = ?';
+        $sql = 'SELECT user.id, user.role_id, user.password, role.name FROM user INNER JOIN role ON role.id = user.role_id WHERE pseudo = ?';
         $data = $this->createQuery($sql,[$post->get('pseudo')]);
         $result = $data->fetch();
         $isPasswordValid = password_verify($post->get('password'), $result['password']);

@@ -91,5 +91,9 @@ class BackController extends Controller{
         }
         header('Location: index.php');
     }
+
+    public function administration(){
+        return $this->view->render('administration');
+    }
 }
 //session n'est pas appelé depuis backcontroller mais via controller car request permet d'accéder à parameter et session, et appeler depuis controller les rendra dispo pour les classes filles
