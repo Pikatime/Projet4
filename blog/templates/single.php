@@ -14,8 +14,13 @@
     <br>
 
     <div class="actions"> <!--div de modification d'articles-->
+    <?php if($this->session->get('role') === 'admin'){ ?>
         <a href="../public/index.php?route=editArticle&articleId=<?=$article->getId(); ?>">Modifier</a> 
         <a href="../public/index.php?route=deleteArticle&articleId=<?=$article->getId(); ?>">Supprimer</a>
+        <a href="../public/index.php?route=administration"> Retour à l'administration</a>
+    <?php
+    } ?>
+        
     </div>
     <br>
 
@@ -42,9 +47,13 @@
                 <?php
             }
             ?>
-            <p><a href="../public/index.php?route=deleteComment&commentId=<?= $comment->getId(); ?>">Supprimer le commentaire</a></p>
-            <br>
+            
+
+            <?php if($this->session->get('role') === 'admin'){ ?>
+                <a href="../public/index.php?route=deleteComment&commentId=<?= $comment->getId(); ?>">Supprimer le commentaire</a>
             <?php
+            } ?>    
+        <?php
         }
         ?>
     </div>

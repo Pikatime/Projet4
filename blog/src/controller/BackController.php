@@ -1,40 +1,55 @@
 <?php
+
 namespace App\src\controller;
+
 use App\config\Parameter;
 
-class BackController extends Controller{
-
-    public function addArticle(Parameter $post){// mise en place des conditions pour la création ou non d'un article via AddAticle
-    if($post->get('submit')){
-        $errors = $this->validation->validate($post, 'Article');
-        if(!$errors){
-            $this->articleDAO->addArticle($post);
-            $this->session->set('add_article','Le nouvel article a bien été ajouté');
-            header('Location: index.php');
-        }
-        var_dump($errors);
-       return $this->view->render('add_article',[
-        'post' => $post,
-        'errors'=> $errors
+class BackController extends Controller
+{
+    public function administration()
+    {
+        $articles = $this->articleDAO->getArticles();
+        $comments = $this->commentDAO->getFlagComments();
+        $users = $this->userDAO->getUsers();
+        return $this->view->render('administration', [
+            'articles' => $articles,
+            'comments' => $comments,
+            'users' => $users
         ]);
-   
-    }
-    return $this->view->render('add_article');
     }
 
-    public function editArticle(Parameter $post, $articleId){
-        $article = $this->articleDAO->getArticle($articleId);
-        if($post->get('submit')){
+    public function addArticle(Parameter $post)
+    {
+        if($post->get('submit')) {
             $errors = $this->validation->validate($post, 'Article');
-            if(!$errors){
-                $this->articleDAO->editArticle($post,$articleId);
-                $this->session->set('edit_article', 'L\'article a bien été modifié');
-                header('Location: index.php');
+            if(!$errors) {
+                $this->articleDAO->addArticle($post, $this->session->get('id'));
+                $this->session->set('add_article', 'Le nouvel article a bien été ajouté');
+                header('Location: index.php?route=administration');
+            }
+            return $this->view->render('add_article', [
+                'post' => $post,
+                'errors' => $errors
+            ]);
+        }
+        return $this->view->render('add_article');
+    }
+
+    public function editArticle(Parameter $post, $articleId)
+    {
+        $article = $this->articleDAO->getArticle($articleId);
+        if($post->get('submit')) {
+            $errors = $this->validation->validate($post, 'Article');
+            if(!$errors) {
+                $this->articleDAO->editArticle($post, $articleId, $this->session->get('id'));
+                $this->session->set('edit_article', 'L\' article a bien été modifié');
+                header('Location: index.php?route=administration');
             }
             return $this->view->render('edit_article', [
-            'article'=>$article,
-            'errors' =>$errors 
-            ]); 
+                'post' => $post,
+                'errors' => $errors
+            ]);
+
         }
         $post->set('id', $article->getId());
         $post->set('title', $article->getTitle());
@@ -42,29 +57,38 @@ class BackController extends Controller{
         $post->set('author', $article->getAuthor());
 
         return $this->view->render('edit_article', [
-            'post' => $post,
-            'article'=> $article
+            'post' => $post
         ]);
     }
 
-    public function deleteArticle($articleId){
-    $this->articleDAO->deleteArticle($articleId);
-    $this->session->set('delete_article', 'L\'article a été supprimé');
-    header('Location: index.php');
+    public function deleteArticle($articleId)
+    {
+        $this->articleDAO->deleteArticle($articleId);
+        $this->session->set('delete_article', 'L\' article a bien été supprimé');
+        header('Location: index.php?route=administration');
     }
 
-    public function deleteComment($commentId){
+    public function unflagComment($commentId){
+        $this->commentDAO->unflagComment($commentId);
+        $this->session->set('unflag_comment', 'Le commentaire a bien été désignalé');
+        header('Location: index.php?route=administration');
+    }
+
+    public function deleteComment($commentId)
+    {
         $this->commentDAO->deleteComment($commentId);
-        $this->session->set('delete_comment', 'Le commentaire a été supprimé');
-        header('Location: index.php');
+        $this->session->set('delete_comment', 'Le commentaire a bien été supprimé');
+        header('Location: index.php?route=administration');
     }
 
-    public function profile(){
+    public function profile()
+    {
         return $this->view->render('profile');
     }
 
-    public function updatePassword(Parameter $post){
-        if($post->get('submit')){
+    public function updatePassword(Parameter $post)
+    {
+        if($post->get('submit')) {
             $this->userDAO->updatePassword($post, $this->session->get('pseudo'));
             $this->session->set('update_password', 'Le mot de passe a été mis à jour');
             header('Location: index.php?route=profile');
@@ -72,28 +96,32 @@ class BackController extends Controller{
         return $this->view->render('update_password');
     }
 
-    public function logout(){
+    public function logout()
+    {
         $this->logoutOrDelete('logout');
     }
 
-    public function deleteAccount(){
+    public function deleteAccount()
+    {
         $this->userDAO->deleteAccount($this->session->get('pseudo'));
         $this->logoutOrDelete('delete_account');
     }
 
-    public function logoutOrDelete($param){
+    public function deleteUser(){
+        $this->userDAO->deleteUser($userId);
+        $this->session->set('delete_user', 'L\'utilisateur a bien été supprimé');
+        header('Location: index.php?route=administration');
+    }
+
+    private function logoutOrDelete($param)
+    {
         $this->session->stop();
         $this->session->start();
-        if($param === 'logout'){
-            $this->session->set($param, 'A bientot');
-        }else{
+        if($param === 'logout') {
+            $this->session->set($param, 'À bientôt');
+        } else {
             $this->session->set($param, 'Votre compte a bien été supprimé');
         }
         header('Location: index.php');
     }
-
-    public function administration(){
-        return $this->view->render('administration');
-    }
 }
-//session n'est pas appelé depuis backcontroller mais via controller car request permet d'accéder à parameter et session, et appeler depuis controller les rendra dispo pour les classes filles
