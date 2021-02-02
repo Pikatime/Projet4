@@ -1,0 +1,25 @@
+
+
+.block_session_content{
+    width: 80%;
+}
+
+.block_content{
+    display:flex;
+    flex-direction: column;
+}
+
+.list_articles{
+    border: 2px grey solid;
+    width: 60%;
+    margin-bottom: 1em;
+}
+
+.content_text{
+    border-bottom: 1px black solid;
+}
+
+.content_infos{
+    text-align: right;
+}
+

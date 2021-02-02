@@ -1,0 +1,74 @@
+.general_setup{
+    margin: 1em;
+}
+
+.banner{
+    width: 100%;
+}
+
+body{
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+.title_page{
+    position: absolute;
+    top: 0em;
+    left: 0em;
+    width: 100%; 
+}
+
+.subtitle{
+    position: absolute;
+    left: 6em;
+}
+
+.block_all_content{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+a{
+    text-decoration: none;
+    color:black;
+}
+
+
+
+.block_menu{
+    border: 1px grey solid;
+    width: 20%;
+}
+
+ul{
+    display: flex;
+    flex-direction: column;
+    margin: 0em;
+    padding: 0em;
+    list-style-type: none;
+}
+.menu{
+    padding: 1em 1em 1em 1em;
+    text-align: center;
+}
+
+.menu:hover{
+    font-weight: bold;
+    font-size: large;
+}
+
+.info_session{
+    text-align: center;
+    font-size: 2em;
+    height: 10%;
+}
+h2{
+    font-family: 'Roboto', sans-serif;
+}
+
+p{
+    text-align: justify;
+    padding: 1em;
+}

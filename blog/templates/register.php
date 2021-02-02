@@ -1,19 +1,29 @@
 <?php $this->title = "Inscription"; ?>
 
-<h1> Mon Blog </h1>
-<p> En construction</p>
+<body>
+    <div class="title_page">
+        <h1>INSCRIPTION</h1>
+    </div>
 
-<div>
-<form method="post" action="../public/index.php?route=register">
-        <label for="pseudo">Pseudo</label><br>
-        <input type="text" id="pseudo" name="pseudo" value="<?= isset($post) ? htmlspecialchars($post->get('pseudo')): ''; ?>"><br>
-        <?= isset($errors['pseudo']) ? $errors['pseudo'] : ''; ?>
-        <label for="password">Mot de passe</label><br>
-        <input type="password" id="password" name="password"><br>
-        <?= isset($errors['password']) ? $errors['password'] : ''; ?>
-        <input type="submit" value="Inscription" id="submit" name="submit">
-    </form>
+    <div class="block_all_content">
+        <div class="block_menu">
+            <nav>
+                <ul>
+                    <li class="menu"><a href = "../public/index.php">Retour à l'accueil</a></li>
+                </ul>
+            </nav>
+        </div>
 
-    <a href = "../public/index.php">Retour à l'accueil</a>
-</div>
-        
+        <div class="block_session_content">
+            <form method="post" action="../public/index.php?route=register">
+                <label for="pseudo">Pseudo</label><br>
+                <input type="text" id="pseudo" name="pseudo" value="<?= isset($post) ? htmlspecialchars($post->get('pseudo')): ''; ?>"><br>
+                <?= isset($errors['pseudo']) ? $errors['pseudo'] : ''; ?>
+                <label for="password">Mot de passe</label><br>
+                <input type="password" id="password" name="password"><br>
+                <?= isset($errors['password']) ? $errors['password'] : ''; ?>
+                <input type="submit" value="Inscription" id="submit" name="submit">
+            </form>
+        </div>
+    </div>
+</body>

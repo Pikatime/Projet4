@@ -1,0 +1,7 @@
+.form_title, .form_content{
+    width: 90%;
+}
+
+.form_content{
+    height: 150px;
+}

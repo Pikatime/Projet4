@@ -1,0 +1,16 @@
+.profile_page{
+    height: 80vh;
+}
+
+.id_user{
+    visibility: hidden;
+}
+
+.profile_content{
+    display: flex;
+    flex-direction: column;
+}
+
+.action_profile{
+    padding-top: 1em ;
+}

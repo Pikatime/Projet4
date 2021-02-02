@@ -1,0 +1,36 @@
+#content_admin{
+    border: 3px black solid;
+}
+
+.table_admin{
+    width: 100%;
+}
+
+.title_table_admin{
+    border-top: 1px black solid;
+    border-bottom: 1px black solid;
+    text-align: center;
+}
+
+.content_table_admin{
+    border-top: 1px black solid;
+}
+
+.mod_article_admin{
+    border: 3px black solid;
+}
+
+.choice_action_admin{
+    border: 3px black solid;
+    padding: 0.5em;
+    text-align: center;
+}
+
+.choice_action_admin:hover{
+    font-weight: bold;
+}
+
+.actions_list{
+    display: flex;
+    flex-direction: column;
+}
